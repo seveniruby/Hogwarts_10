@@ -27,4 +27,5 @@ class TestDefaultSuite():
     self.driver.find_element(By.LINK_TEXT, "霍格沃兹测试学院").click()
     assert "霍格沃兹测试学院" in self.driver.page_source
 
+
   

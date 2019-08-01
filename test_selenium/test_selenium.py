@@ -10,7 +10,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 logging.basicConfig(level=logging.INFO)
 class TestSelenium:
     def setup(self):
-        self.driver=webdriver.Chrome()
+        options=webdriver.ChromeOptions()
+        options.debugger_address="http://127.0.0.1:9222"
+
+        self.driver=webdriver.Chrome(options=options)
         self.driver.implicitly_wait(20)
         self.driver.get('https://testerhome.com')
 

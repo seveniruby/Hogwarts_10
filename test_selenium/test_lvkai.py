@@ -34,4 +34,5 @@ class TestSelenium:
             print(a.location)
             print(a.size)
             a.click()
+            self.driver.exec
 
