@@ -17,6 +17,9 @@ class ProfilePage(BasePage):
     def disable(self):
         pass
 
+    def enable(self):
+        pass
+
     def delete(self):
         pass
     def invite(self):
