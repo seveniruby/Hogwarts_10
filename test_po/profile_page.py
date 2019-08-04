@@ -9,7 +9,7 @@ from test_po.base_page import BasePage
 class ProfilePage(BasePage):
     def update(self, **kwargs):
         self.click_by_js(By.CSS_SELECTOR, ".ww_operationBar .js_edit")
-        element=self.driver.find_element(By.NAME, "username")
+        element=self._driver.find_element(By.NAME, "username")
         element.clear()
         element.send_keys(kwargs["name"])
         self.click_by_js(By.CSS_SELECTOR, ".js_save")

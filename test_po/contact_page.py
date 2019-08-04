@@ -8,6 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from test_po.base_page import BasePage
 from test_po.profile_page import ProfilePage
+from test_po.wework_page import Wework
 
 
 class ContactPage(BasePage):
@@ -19,12 +20,40 @@ class ContactPage(BasePage):
     _leave=(By.XPATH, "//*[text()='离开此页']")
     _search=(By.ID, "memberSearchInput")
     _add =(By.CSS_SELECTOR, ".js_has_member .ww_operationBar .js_add_member")
-    def __init__(self, wework):
-        self.driver=wework.driver
+    def __init__(self, wework: Wework):
+        self._driver=wework.driver
     def add_member(self, name, alias, id, mobile, **kwargs):
         #locator = ".js_has_member a.qui_btn.ww_btn.js_add_member"
-        WebDriverWait(self.driver, 10, 1, ignored_exceptions=(TimeoutException)).until(
-            expected_conditions.element_to_be_clickable(*self._add))
+
+        # for i in range(10):
+        #     try:
+        #         element=self.find(self._add)
+        #         print(i)
+        #         print(element.tag_name)
+        #         print(element.text)
+        #         print(element.rect)
+        #         print(element.is_displayed())
+        #         print(element.is_enabled())
+        #         print(self._driver.execute_script(
+        #             'return document.querySelector(".js_has_member .ww_operationBar .js_add_member").getBoundingClientRect();'))
+        #
+        #         self.click_by_js(*self._add)
+        #         if len(self._driver.find_elements(By.XPATH, '//*[text()="取消"]'))>=1:
+        #             print("OK")
+        #             return
+        #
+        #     except Exception as e:
+        #         print("except")
+        #         print(e)
+
+
+        def click_and_find(x):
+            self.click_by_js(*self._add)
+            return len(x.find_elements(By.XPATH, '//*[text()="取消"]'))>=1
+        WebDriverWait(self._driver, 5).until(click_and_find)
+
+        # WebDriverWait(self._driver, timeout=5, poll_frequency=1, ignored_exceptions=(TimeoutException)).until(
+        #     expected_conditions.element_to_be_clickable(self._add))
 
 
         # for index in range(10):
@@ -36,13 +65,13 @@ class ContactPage(BasePage):
         #
         # print(self.driver.page_source)
         # #todo: 找到等待的状态
-        sleep(1)
+        # sleep(1)
         # print("3s")
         # for index in range(10):
         #     print(self.driver.find_element_by_css_selector(locator).location)
         #     sleep(0.5)
 
-        self.click_by_js(*self._add)
+        # self.click_by_js(*self._add)
         self.find(self._username).send_keys(name)
         self.find(self._alias).send_keys(alias)
         self.find(*self._id).send_keys(id)
@@ -58,5 +87,5 @@ class ContactPage(BasePage):
         return "OK"
 
     def search(self, key):
-        self.driver.find_element(*self._search).send_keys(key)
-        return ProfilePage(self.driver)
+        self._driver.find_element(*self._search).send_keys(key)
+        return ProfilePage(self._driver)
