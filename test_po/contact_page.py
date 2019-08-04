@@ -11,13 +11,20 @@ from test_po.profile_page import ProfilePage
 
 
 class ContactPage(BasePage):
+    _username=(By.NAME, "username")
+    _alias=(By.NAME, "english_name")
+    _id=(By.NAME, "acctid")
+    _mobile=(By.NAME, "mobile")
+    _cancel=(By.CSS_SELECTOR, ".js_btn_cancel")
+    _leave=(By.XPATH, "//*[text()='离开此页']")
+    _search=(By.ID, "memberSearchInput")
+    _add =(By.CSS_SELECTOR, ".js_has_member .ww_operationBar .js_add_member")
     def __init__(self, wework):
         self.driver=wework.driver
     def add_member(self, name, alias, id, mobile, **kwargs):
         #locator = ".js_has_member a.qui_btn.ww_btn.js_add_member"
-        locator = ".js_has_member .ww_operationBar .js_add_member"
         WebDriverWait(self.driver, 10, 1, ignored_exceptions=(TimeoutException)).until(
-            expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, locator)))
+            expected_conditions.element_to_be_clickable(*self._add))
 
 
         # for index in range(10):
@@ -35,13 +42,13 @@ class ContactPage(BasePage):
         #     print(self.driver.find_element_by_css_selector(locator).location)
         #     sleep(0.5)
 
-        self.click_by_js(By.CSS_SELECTOR, locator)
-        self.driver.find_element(By.NAME, "username").send_keys(name)
-        self.driver.find_element(By.NAME, "english_name").send_keys(alias)
-        self.driver.find_element_by_name("acctid").send_keys(id)
-        self.driver.find_element_by_name("mobile").send_keys(mobile)
-        self.click_by_js(By.CSS_SELECTOR, ".js_btn_cancel")
-        self.click_by_js(By.XPATH, "//*[text()='离开此页']")
+        self.click_by_js(*self._add)
+        self.find(self._username).send_keys(name)
+        self.find(self._alias).send_keys(alias)
+        self.find(*self._id).send_keys(id)
+        self.find(self._mobile).send_keys(mobile)
+        self.click_by_js(*self._cancel)
+        self.click_by_js(*self._leave)
         return self
 
     def delete_member(self):
@@ -51,5 +58,5 @@ class ContactPage(BasePage):
         return "OK"
 
     def search(self, key):
-        self.driver.find_element_by_id("memberSearchInput").send_keys(key)
+        self.driver.find_element(*self._search).send_keys(key)
         return ProfilePage(self.driver)
