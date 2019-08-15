@@ -21,8 +21,7 @@ class TestXueqiu:
 
     def test_profile(self):
 
-        el4 = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.ImageView")
-        el4.click()
+        self.driver.find_element_by_id("user_profile_icon").click()
 
     def teardown(self):
         sleep(10)
