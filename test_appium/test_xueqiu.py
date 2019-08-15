@@ -14,18 +14,13 @@ class TestXueqiu:
         caps["deviceName"] = "hogwarts"
         caps["appPackage"] = "com.xueqiu.android"
         caps["appActivity"] = ".view.WelcomeActivityAlias"
+        caps['autoGrantPermissions'] = True
 
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
         self.driver.implicitly_wait(15)
 
     def test_profile(self):
 
-        el1 = self.driver.find_element_by_id("com.xueqiu.android:id/tv_open")
-        el1.click()
-        el2 = self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button")
-        el2.click()
-        el3 = self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button")
-        el3.click()
         el4 = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.ImageView")
         el4.click()
 
