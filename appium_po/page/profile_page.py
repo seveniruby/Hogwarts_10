@@ -1,0 +1,2 @@
+class ProfilePage(object):
+    pass
