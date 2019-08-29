@@ -5,7 +5,10 @@ from time import sleep
 
 from appium import webdriver
 import pytest
+from appium.webdriver.common.mobileby import MobileBy
 from hamcrest import *
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class TestXueqiu:
@@ -17,10 +20,28 @@ class TestXueqiu:
         caps["appPackage"] = "com.xueqiu.android"
         caps["appActivity"] = ".view.WelcomeActivityAlias"
         caps['autoGrantPermissions'] = True
+        #todo： 使用path变量更可靠
+        #caps["chromedriverExecutableDir"] = '/Users/seveniruby/projects/chromedriver/2.20/'
+        #caps["chromedriverUseSystemExecutable"]=True
+        caps["chromedriverExecutable"] = '/Users/seveniruby/projects/chromedriver/2.20/chromedriver'
+
 
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
         self.driver.implicitly_wait(15)
         #等待元素出现
+
+        def click_cancel(x):
+            size=len(self.driver.find_elements(By.ID, "image_cancel"))
+            if size>=1:
+                print("displayed")
+                self.driver.find_element(By.ID, "image_cancel").click()
+            else:
+                print("no displayed")
+
+            return size >= 1
+
+        WebDriverWait(self.driver, 10, 1).until_not(click_cancel)
+
         self.driver.find_element_by_id("user_profile_icon")
 
     def setup(self):
@@ -75,4 +96,28 @@ class TestXueqiu:
         print(price)
         assert price>expect_price
         assert_that(price, close_to(expect_price, expect_price*0.1))
+
+    def test_webview(self):
+        self.driver.find_element(MobileBy.XPATH, "//*[@text='交易']").click()
+        #返回的是不带webview的组件，默认是找不到webview内的元素，除非设置了等待
+        print(self.driver.page_source)
+        #原生定位
+        self.driver.find_element(MobileBy.ID, 'page_type_fund').click()
+
+        WebDriverWait(self.driver, 10, 1).until(lambda x: "WEBVIEW_com.xueqiu.android" in self.driver.contexts)
+        print("=======webview load")
+        #返回的是带有webview组件树，此时可以使用原生定位去定位webview内的元素
+        print(self.driver.page_source)
+        #使用原生定位方式定位webview控件
+        self.driver.find_element(MobileBy.ACCESSIBILITY_ID, "蛋卷基金安全开户").click()
+
+        self.driver.switch_to.context("WEBVIEW_com.xueqiu.android")
+        print("======webview enter")
+        #返回的是html，此次可以使用selenium的css定位
+        print(self.driver.page_source)
+        self.driver.find_element(By.NAME, "tel").send_keys("15600534760")
+        self.driver.find_element(By.NAME, "captcha").send_keys("1234")
+        self.driver.find_element(By.CSS_SELECTOR, ".dj-button").click()
+
+
 

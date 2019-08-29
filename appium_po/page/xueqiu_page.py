@@ -7,6 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from appium_po.page.profile_page import ProfilePage
 from appium_po.page.search_page import SearchPage
+from appium_po.page.trade_page import TradePage
 
 
 class XueqiuPage:
@@ -29,9 +30,19 @@ class XueqiuPage:
         WebDriverWait(self.driver, 60).until(
             expected_conditions.visibility_of_element_located((By.ID, 'image_cancel'))
         )
-        print(self.driver.page_source)
-        print(self.driver.find_element(By.ID, "image_cancel").location)
-        self.driver.find_element(By.ID, "image_cancel").click()
+
+
+        def click_cancel(x):
+            if self.driver.find_element(By.ID, "image_cancel").is_displayed():
+                print("displayed")
+                self.driver.find_element(By.ID, "image_cancel").click()
+            else:
+                print("no displayed")
+
+            return len(self.driver.find_elements(By.ID, "image_cancel")) >= 1
+
+        WebDriverWait(self.driver, 60).until_not(click_cancel)
+
         self.driver.find_element_by_id("user_profile_icon")
 
 
@@ -44,5 +55,10 @@ class XueqiuPage:
 
     def get_ads(self):
         return False
+
+    def goto_trade(self):
+        self.driver.find_element(By.XPATH, "//*[@text='交易']").click()
+        return TradePage(self.driver)
+
 
 
