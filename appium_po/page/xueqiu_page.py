@@ -1,13 +1,11 @@
-from time import sleep
-
 from appium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from appium_po.page.profile_page import ProfilePage
-from appium_po.page.search_page import SearchPage
-from appium_po.page.trade_page import TradePage
+from appium_po.page.profile.profile_page import ProfilePage
+from appium_po.page.stock.search_page import SearchPage
+from appium_po.page.trade.trade_page import TradePage
 
 
 class XueqiuPage:

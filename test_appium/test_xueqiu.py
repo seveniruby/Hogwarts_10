@@ -39,6 +39,7 @@ class TestXueqiu:
         #caps["chromedriverExecutableDir"] = '/Users/seveniruby/projects/chromedriver/2.20/'
         #caps["chromedriverUseSystemExecutable"]=True
         caps["chromedriverExecutable"] = '/Users/seveniruby/projects/chromedriver/2.20/chromedriver'
+        caps['showChromedriverLog']=True
 
 
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
@@ -120,7 +121,7 @@ class TestXueqiu:
         #原生定位
         self.driver.find_element(MobileBy.ID, 'page_type_fund').click()
 
-        WebDriverWait(self.driver, 10, 1).until(lambda x: "WEBVIEW_com.xueqiu.android" in self.driver.contexts)
+        WebDriverWait(self.driver, 20, 1).until(lambda x: "WEBVIEW_com.xueqiu.android" in self.driver.contexts)
         print("=======webview load")
         #返回的是带有webview组件树，此时可以使用原生定位去定位webview内的元素
         print(self.driver.page_source)
@@ -134,6 +135,21 @@ class TestXueqiu:
         self.driver.find_element(By.NAME, "tel").send_keys("15600534760")
         self.driver.find_element(By.NAME, "captcha").send_keys("1234")
         self.driver.find_element(By.CSS_SELECTOR, ".dj-button").click()
+
+
+    def test_webview_2(self):
+        self.driver.find_element(MobileBy.XPATH, "//*[@text='交易']").click()
+        #返回的是不带webview的组件，默认是找不到webview内的元素，除非设置了等待
+        print(self.driver.page_source)
+        #原生定位
+
+
+        WebDriverWait(self.driver, 20, 1).until(lambda x: "WEBVIEW_com.xueqiu.android" in self.driver.contexts)
+        print("=======webview load")
+        #返回的是带有webview组件树，此时可以使用原生定位去定位webview内的元素
+        print(self.driver.page_source)
+        self.driver.find_element(By.CSS_SELECTOR, '')
+
 
     def test_screenshot(self):
         print(self.driver.start_recording_screen())
