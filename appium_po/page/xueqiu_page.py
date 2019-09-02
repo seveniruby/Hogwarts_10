@@ -3,53 +3,73 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+from appium_po.page.base_page import BasePage
 from appium_po.page.profile.profile_page import ProfilePage
 from appium_po.page.stock.search_page import SearchPage
 from appium_po.page.trade.trade_page import TradePage
 
 
-class XueqiuPage:
+class XueqiuPage(BasePage):
 
-    def __init__(self):
+    driver=None
+    app="com.xueqiu.android"
+    activity=".view.WelcomeActivityAlias"
 
+    _profile_icon = (By.ID, "user_profile_icon")
+
+    def first_start(self):
         caps = {}
         caps["platformName"] = "android"
         caps["deviceName"] = "hogwarts"
-        caps["appPackage"] = "com.xueqiu.android"
-        caps["appActivity"] = ".view.WelcomeActivityAlias"
+        caps["appPackage"] = self.app
+        caps["appActivity"] = self.activity
         caps['autoGrantPermissions'] = True
         #caps['unicodeKeyboard']= True
         #caps['resetKeyboard']= True
+        caps['noreset']=True
         caps['automationName']='uiautomator2'
 
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
-        self.driver.implicitly_wait(12)
+        self.driver.implicitly_wait(5)
         #等待元素出现
-        WebDriverWait(self.driver, 60).until(
-            expected_conditions.visibility_of_element_located((By.ID, 'image_cancel'))
-        )
+        # WebDriverWait(self.driver, 60).until(
+        #     expected_conditions.visibility_of_element_located((By.ID, 'image_cancel'))
+        # )
+        #
+        #
+        # def click_cancel(x):
+        #     elements=self.driver.find_elements(By.ID, "image_cancel")
+        #     if len(elements)>=1:
+        #         print("displayed")
+        #         elements[0].click()
+        #     else:
+        #         print("no displayed")
+        #
+        #     return len(elements) >= 1
+        #
+        # WebDriverWait(self.driver, 60).until_not(click_cancel)
+
+        XueqiuPage.driver=self.driver
+
+    def __init__(self):
+        if XueqiuPage.driver==None:
+            self.first_start()
+        else:
+            print("launch")
+            self.driver.start_activity(self.app, self.activity)
 
 
-        def click_cancel(x):
-            if self.driver.find_element(By.ID, "image_cancel").is_displayed():
-                print("displayed")
-                self.driver.find_element(By.ID, "image_cancel").click()
-            else:
-                print("no displayed")
-
-            return len(self.driver.find_elements(By.ID, "image_cancel")) >= 1
-
-        WebDriverWait(self.driver, 60).until_not(click_cancel)
-
-        self.driver.find_element_by_id("user_profile_icon")
-
+        self.find(self._profile_icon)
+        # WebDriverWait(self.driver, 60).until(expected_conditions.visibility_of_element_located((By.ID, "user_profile_icon")))
 
     def goto_search(self):
         self.driver.find_element_by_id("home_search").click()
         return SearchPage(self.driver)
 
     def goto_profile(self):
-        return ProfilePage()
+        self.find(self._profile_icon).click()
+
+        return ProfilePage(self.driver)
 
     def get_ads(self):
         return False

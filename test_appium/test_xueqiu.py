@@ -28,12 +28,12 @@ class TestXueqiu:
         caps["noReset"]="true"
 
         #fast
-        caps["skipUnlock"]=True
-        caps["skipLogcatCapture"]=True
-        caps["disableAndroidWatchers"]=True
-        caps["ignoreUnimportantViews"]=True
-        caps["skipServerInstallation"]=True
-        caps["systemPort"]=6790
+        # caps["skipUnlock"]=True
+        # caps["skipLogcatCapture"]=True
+        # caps["disableAndroidWatchers"]=True
+        # caps["ignoreUnimportantViews"]=True
+        # caps["skipServerInstallation"]=True
+        # caps["systemPort"]=6790
 
         #todo： 使用path变量更可靠
         #caps["chromedriverExecutableDir"] = '/Users/seveniruby/projects/chromedriver/2.20/'
@@ -179,8 +179,9 @@ class TestXueqiu:
         for p in self.driver.get_performance_data_types():
             print(self.driver.get_performance_data("com.xueqiu.android", p))
 
-
-
-
-
-
+    def test_notification(self):
+        self.driver.open_notifications()
+        sleep(3)
+        print(self.driver.page_source)
+        self.driver.keyevent(4)
+        self.driver.launch_app()
