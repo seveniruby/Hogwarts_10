@@ -1,0 +1,355 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "topics"
+  ],
+  "properties": {
+    "topics": {
+      "$id": "#/properties/topics",
+      "type": "array",
+      "title": "The Topics Schema",
+      "items": {
+        "$id": "#/properties/topics/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "id",
+          "title",
+          "created_at",
+          "updated_at",
+          "replied_at",
+          "replies_count",
+          "node_name",
+          "node_id",
+          "last_reply_user_id",
+          "last_reply_user_login",
+          "excellent",
+          "likes_count",
+          "suggested_at",
+          "closed_at",
+          "deleted",
+          "user",
+          "hits",
+          "abilities"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#/properties/topics/items/properties/id",
+            "type": "integer",
+            "title": "The Id Schema",
+            "default": 0,
+            "examples": [
+              20836
+            ]
+          },
+          "title": {
+            "$id": "#/properties/topics/items/properties/title",
+            "type": "string",
+            "title": "The Title Schema",
+            "default": "",
+            "examples": [
+              "Pipeline 实践：将 Jenkinsfile 与项目分离"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "created_at": {
+            "$id": "#/properties/topics/items/properties/created_at",
+            "type": "string",
+            "title": "The Created_at Schema",
+            "default": "",
+            "examples": [
+              "2019-10-13T14:21:53.410+08:00"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "updated_at": {
+            "$id": "#/properties/topics/items/properties/updated_at",
+            "type": "string",
+            "title": "The Updated_at Schema",
+            "default": "",
+            "examples": [
+              "2019-10-13T16:57:11.215+08:00"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "replied_at": {
+            "$id": "#/properties/topics/items/properties/replied_at",
+            "type": "string",
+            "title": "The Replied_at Schema",
+            "default": "",
+            "examples": [
+              "2019-10-13T16:57:11.191+08:00"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "replies_count": {
+            "$id": "#/properties/topics/items/properties/replies_count",
+            "type": "integer",
+            "title": "The Replies_count Schema",
+            "default": 0,
+            "examples": [
+              1
+            ]
+          },
+          "node_name": {
+            "$id": "#/properties/topics/items/properties/node_name",
+            "type": "string",
+            "title": "The Node_name Schema",
+            "default": "",
+            "examples": [
+              "持续集成"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "node_id": {
+            "$id": "#/properties/topics/items/properties/node_id",
+            "type": "integer",
+            "title": "The Node_id Schema",
+            "default": 0,
+            "examples": [
+              46
+            ]
+          },
+          "last_reply_user_id": {
+            "$id": "#/properties/topics/items/properties/last_reply_user_id",
+            "type": "integer",
+            "title": "The Last_reply_user_id Schema",
+            "default": 0,
+            "examples": [
+              22495
+            ]
+          },
+          "last_reply_user_login": {
+            "$id": "#/properties/topics/items/properties/last_reply_user_login",
+            "type": "string",
+            "title": "The Last_reply_user_login Schema",
+            "default": "",
+            "examples": [
+              "arrow"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "excellent": {
+            "$id": "#/properties/topics/items/properties/excellent",
+            "type": "integer",
+            "title": "The Excellent Schema",
+            "default": 0,
+            "examples": [
+              0
+            ]
+          },
+          "likes_count": {
+            "$id": "#/properties/topics/items/properties/likes_count",
+            "type": "integer",
+            "title": "The Likes_count Schema",
+            "default": 0,
+            "examples": [
+              0
+            ]
+          },
+          "suggested_at": {
+            "$id": "#/properties/topics/items/properties/suggested_at",
+            "type": "null",
+            "title": "The Suggested_at Schema",
+            "default": null,
+            "examples": [
+              null
+            ]
+          },
+          "closed_at": {
+            "$id": "#/properties/topics/items/properties/closed_at",
+            "type": "null",
+            "title": "The Closed_at Schema",
+            "default": null,
+            "examples": [
+              null
+            ]
+          },
+          "deleted": {
+            "$id": "#/properties/topics/items/properties/deleted",
+            "type": "boolean",
+            "title": "The Deleted Schema",
+            "default": false,
+            "examples": [
+              false
+            ]
+          },
+          "user": {
+            "$id": "#/properties/topics/items/properties/user",
+            "type": "object",
+            "title": "The User Schema",
+            "required": [
+              "id",
+              "login",
+              "name",
+              "avatar_url",
+              "abilities"
+            ],
+            "properties": {
+              "id": {
+                "$id": "#/properties/topics/items/properties/user/properties/id",
+                "type": "integer",
+                "title": "The Id Schema",
+                "default": 0,
+                "examples": [
+                  47462
+                ]
+              },
+              "login": {
+                "$id": "#/properties/topics/items/properties/user/properties/login",
+                "type": "string",
+                "title": "The Login Schema",
+                "default": "",
+                "examples": [
+                  "liangqiangWang"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "name": {
+                "$id": "#/properties/topics/items/properties/user/properties/name",
+                "type": "string",
+                "title": "The Name Schema",
+                "default": "",
+                "examples": [
+                  "某某wang"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "avatar_url": {
+                "$id": "#/properties/topics/items/properties/user/properties/avatar_url",
+                "type": "string",
+                "title": "The Avatar_url Schema",
+                "default": "",
+                "examples": [
+                  "/uploads/user/avatar/47462/310455.jpg!large"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "abilities": {
+                "$id": "#/properties/topics/items/properties/user/properties/abilities",
+                "type": "object",
+                "title": "The Abilities Schema",
+                "required": [
+                  "update",
+                  "destroy"
+                ],
+                "properties": {
+                  "update": {
+                    "$id": "#/properties/topics/items/properties/user/properties/abilities/properties/update",
+                    "type": "boolean",
+                    "title": "The Update Schema",
+                    "default": false,
+                    "examples": [
+                      false
+                    ]
+                  },
+                  "destroy": {
+                    "$id": "#/properties/topics/items/properties/user/properties/abilities/properties/destroy",
+                    "type": "boolean",
+                    "title": "The Destroy Schema",
+                    "default": false,
+                    "examples": [
+                      false
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "hits": {
+            "$id": "#/properties/topics/items/properties/hits",
+            "type": "integer",
+            "title": "The Hits Schema",
+            "default": 0,
+            "examples": [
+              23
+            ]
+          },
+          "abilities": {
+            "$id": "#/properties/topics/items/properties/abilities",
+            "type": "object",
+            "title": "The Abilities Schema",
+            "required": [
+              "update",
+              "destroy",
+              "ban",
+              "excellent",
+              "unexcellent",
+              "close",
+              "open"
+            ],
+            "properties": {
+              "update": {
+                "$id": "#/properties/topics/items/properties/abilities/properties/update",
+                "type": "boolean",
+                "title": "The Update Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "destroy": {
+                "$id": "#/properties/topics/items/properties/abilities/properties/destroy",
+                "type": "boolean",
+                "title": "The Destroy Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "ban": {
+                "$id": "#/properties/topics/items/properties/abilities/properties/ban",
+                "type": "boolean",
+                "title": "The Ban Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "excellent": {
+                "$id": "#/properties/topics/items/properties/abilities/properties/excellent",
+                "type": "boolean",
+                "title": "The Excellent Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "unexcellent": {
+                "$id": "#/properties/topics/items/properties/abilities/properties/unexcellent",
+                "type": "boolean",
+                "title": "The Unexcellent Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "close": {
+                "$id": "#/properties/topics/items/properties/abilities/properties/close",
+                "type": "boolean",
+                "title": "The Close Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "open": {
+                "$id": "#/properties/topics/items/properties/abilities/properties/open",
+                "type": "boolean",
+                "title": "The Open Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
