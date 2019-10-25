@@ -50,7 +50,7 @@ class HttpApi(yaml.YAMLObject):
         return requests.request(self.method, self.url, params=self.query).json()
 
     def __repr__(self):
-        return "%s(name=%r, method=%r, url=%r, query=%r)" % \
+        return "%s(method=%r, url=%r, query=%r)" % \
                (self.__class__.__name__, self.method, self.url, self.query)
 
 
@@ -61,7 +61,7 @@ def test_write_httpapi():
 
 def test_read_httpapi():
 
-   req=load(open("/tmp/1", "r"))
+   req=load(open("/tmp/1", "r"), Loader=yaml.Loader)
    print(req)
 
 def test_get_login():
