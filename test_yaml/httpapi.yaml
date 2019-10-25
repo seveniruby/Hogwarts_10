@@ -1,0 +1,5 @@
+!!python/object:test_yaml.HttpApi
+method: get
+query:
+  limit: 2
+url: https://testerhome.com/api/v3/topics.json
