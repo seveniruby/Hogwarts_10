@@ -1,7 +1,8 @@
 # This sample code uses the Appium python client
 # pip install Appium-Python-Client
 # Then you can paste this into a file and simply run with Python
-from time import sleep
+from datetime import datetime
+from time import *
 
 from appium import webdriver
 import pytest
@@ -43,7 +44,7 @@ class TestXueqiu:
 
 
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
-        self.driver.implicitly_wait(15)
+        self.driver.implicitly_wait(5)
         #等待元素出现
 
         def click_cancel(x):
@@ -65,7 +66,7 @@ class TestXueqiu:
         pass
 
     def teardown_class(self):
-        sleep(10)
+        sleep(20)
         self.driver.quit()
 
     def test_profile(self):
@@ -185,3 +186,27 @@ class TestXueqiu:
         print(self.driver.page_source)
         self.driver.keyevent(4)
         self.driver.launch_app()
+
+    def test_click_selected(self):
+        selected=(By.XPATH, "//*[@text='自选']")
+        height=self.driver.get_window_rect()['height']
+        def loaded(driver):
+            print(datetime.now())
+            y=driver.find_element(*selected).location['y']
+            print(y)
+            return y < height * 0.8
+
+        WebDriverWait(self.driver, 10).until(loaded)
+        self.driver.find_element(*selected).click()
+
+    def test_network_exception(self):
+        selected = (By.XPATH, "//*[@text='自选']")
+        self.driver.find_element(*selected).click()
+        print(self.driver.page_source)
+        msg = (By.XPATH, "//*[contains(@text, '网络')]")
+        toast=self.driver.find_element(*msg)
+        print(toast)
+        print(toast.text)
+        print(toast.get_attribute("class"))
+
+

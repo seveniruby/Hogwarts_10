@@ -1,0 +1,6 @@
+- - id: home_search
+  - id: search_input_text
+    input: alibaba
+  - id: name
+  - xpath: //*[contains(@resource-id, 'stockCode') and @text='BABA']/../../..//*[contains(@resource-id, 'current_price')]
+    get: text
