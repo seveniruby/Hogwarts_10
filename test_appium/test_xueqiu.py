@@ -187,26 +187,7 @@ class TestXueqiu:
         self.driver.keyevent(4)
         self.driver.launch_app()
 
-    def test_click_selected(self):
-        selected=(By.XPATH, "//*[@text='自选']")
-        height=self.driver.get_window_rect()['height']
-        def loaded(driver):
-            print(datetime.now())
-            y=driver.find_element(*selected).location['y']
-            print(y)
-            return y < height * 0.8
 
-        WebDriverWait(self.driver, 10).until(loaded)
-        self.driver.find_element(*selected).click()
 
-    def test_network_exception(self):
-        selected = (By.XPATH, "//*[@text='自选']")
-        self.driver.find_element(*selected).click()
-        print(self.driver.page_source)
-        msg = (By.XPATH, "//*[contains(@text, '网络')]")
-        toast=self.driver.find_element(*msg)
-        print(toast)
-        print(toast.text)
-        print(toast.get_attribute("class"))
 
 
