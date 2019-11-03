@@ -13,3 +13,7 @@ class TestUtils(TestCase):
         r=requests.get("https://testerhome.com/api/v3/topics.json?limit=2").json()
         print(Utils.format(r))
 
+    def test_jsonpath(self):
+        r = requests.get("https://testerhome.com/api/v3/topics.json?limit=2").json()
+        assert Utils.jsonpath(r, "$..topics[?(@.excellent == 0)]")[0]["id"] > 20000
+
