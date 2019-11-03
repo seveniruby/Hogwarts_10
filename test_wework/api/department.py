@@ -12,19 +12,15 @@ class Department(BaseApi):
     create_url = "https://qyapi.weixin.qq.com/cgi-bin/department/create"
 
     def list(self, id):
-        self.json_data = requests.get(self.list_url, params={"access_token": WeWork.get_token(), "id": id}).json()
+        self.json_data = requests.get(self.list_url, params={"access_token": WeWork.get_contact_token(), "id": id}).json()
         self.verbose(self.json_data)
         return self.json_data
 
     def create(self, name: str, parentid, order):
-        # proxies = {
-        #     'http': 'http://127.0.0.1:8888',
-        #     'https': 'http://127.0.0.1:8888',
-        # }
 
         self.json_data = requests.post(
             self.create_url,
-            params={"access_token": WeWork.get_token()},
+            params={"access_token": WeWork.get_contact_token()},
             # 需要设置UTF8编码
             headers={'content-type': 'application/json; charset=utf-8'},
             json={
