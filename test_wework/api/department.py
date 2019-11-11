@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from test_wework.api.BaseApi import BaseApi
+from test_wework.api.base_api import BaseApi
 from test_wework.api.wework import WeWork
 from test_wework.utils.Utils import Utils
 
