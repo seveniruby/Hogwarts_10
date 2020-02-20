@@ -1,0 +1,4 @@
+- url: http://47.95.238.18:8090/get
+  method: get
+- url: http://47.95.238.18:8090/post
+  method: post
