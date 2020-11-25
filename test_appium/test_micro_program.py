@@ -1,3 +1,4 @@
+from builtins import range
 from time import sleep
 
 from appium import webdriver
@@ -20,7 +21,7 @@ class TestMicroProgram:
         #caps["chromedriverExecutableDir"] = '/Users/seveniruby/projects/chromedriver/2.20/'
         #caps["chromedriverUseSystemExecutable"]=True
         caps["chromedriverExecutable"] = '/Users/seveniruby/projects/chromedriver/2.30/chromedriver'
-
+        caps["chromeOptions"] = { 'androidProcess': "com.tencent.mm:appbrand0"}
 
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
         self.driver.implicitly_wait(15)
@@ -30,7 +31,6 @@ class TestMicroProgram:
     def test_xueqiu(self):
         self.driver.find_element(By.XPATH, "//*[@text='文件传输助手']").click()
         self.driver.find_element(By.XPATH, "//*[@text='雪球股票']").click()
-
 
         for i in range(30):
             sleep(2)

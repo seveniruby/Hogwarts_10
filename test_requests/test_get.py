@@ -9,7 +9,7 @@ def get_json(url):
 
 
 
-# contents of test_app.py, a simple test for our API retrieval
+# contents of test_app.py, a simple unit for our API retrieval
 # import requests for the purposes of monkeypatching
 import requests
 

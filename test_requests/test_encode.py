@@ -57,7 +57,7 @@ class ApiRequest:
             env={
                 "docker.testing-studio.com": {
                     "dev": "1.1.1.1",
-                    "test": "1.1.1.2"
+                    "unit": "1.1.1.2"
                 },
                 "default": "dev"
             }
@@ -67,7 +67,11 @@ class ApiRequest:
             )
             data["headers"]["Host"]="docker.testing-studio.com"
 
-            res=requests.request(data["method"], data["url"], headers=data["headers"])
+            res=requests.request(
+                data["method"],
+                data["url"],
+                headers=data["headers"]
+            )
             if data["encoding"]=="base64":
                 return json.loads(base64.b64decode(res.content))
             if data["encoding"]=="private":

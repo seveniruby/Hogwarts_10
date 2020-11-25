@@ -26,7 +26,8 @@ class Message(BaseApi):
                 "safe": 0,
                 "enable_id_trans": 0
             },
-            proxies=self.proxies, verify=False
+            # proxies=self.proxies,
+            verify=False
         ).json()
         self.verbose(self.json_data)
 

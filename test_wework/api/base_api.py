@@ -1,6 +1,5 @@
 import requests
 
-from test_wework.api.wework import WeWork
 from test_wework.utils.Utils import Utils
 import pprint
 
@@ -27,6 +26,7 @@ class BaseApi:
         return Utils.jsonpath(self.json_data, expr)
 
     def request(self, method, url, params: dict, json, data):
+        from test_wework.api.wework import WeWork
         #todo: 封装从外部读取api、或者api默认追加的一些参数
         self.json_data = requests.request(
             method, url=url,

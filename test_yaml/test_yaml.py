@@ -7,7 +7,7 @@ def test_yaml():
     env = {
         "docker.testing-studio.com": {
             "dev": "1.1.1.1",
-            "test": "1.1.1.2"
+            "unit": "1.1.1.2"
         },
         "default": "dev"
     }
@@ -19,21 +19,21 @@ def test_yaml():
     default: dev
     docker.testing-studio.com:
       dev: 1.1.1.100
-      test: 1.1.1.200
+      unit: 1.1.1.200
     """
 
     print(load(yaml_str))
 
-    f=open("demo.yaml", "w")
+    f=open("demo.3.data.yaml", "w")
     print(dump(env, f))
 
 def test_read_yaml_file():
-    with open("demo.yaml", "r") as f2:
+    with open("demo.3.data.yaml", "r") as f2:
         print(load(f2))
 
 
 
-#@pytest.mark.parametrize("num", load(open("demo.yaml", "r"))["array"])
+#@pytest.mark.parametrize("num", load(open("demo.3.data.yaml", "r"))["array"])
 def test_param_from_yaml(num):
     assert num>1
 
